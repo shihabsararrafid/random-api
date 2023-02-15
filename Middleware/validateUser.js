@@ -16,15 +16,16 @@ module.exports.validateUser = (req, res, next) => {
     hasPhotoUrl &&
     !isNaN(nId)
   ) {
-    console.log(
-      hasId,
-      hasName,
-      hasGender,
-      hasContact,
-      hasAddress,
-      hasPhotoUrl,
-      isNaN(nId)
-    );
+    // console.log(
+    //   hasId,
+    //   hasName,
+    //   hasGender,
+    //   hasContact,
+    //   hasAddress,
+    //   hasPhotoUrl,
+    //   isNaN(nId)
+    // );
+    
     next();
   } else {
     res.send("Data is not appropriate!XX!");

@@ -1,23 +1,29 @@
-// module.exports.getAllUser = (req, res, next) => {
-//   res.send("All User got");
-//   //next();
-// };
 const fs = require("fs");
+const { loadUser } = require("../Middleware/LoadUser");
 module.exports.getAllUser = (req, res) => {
-  fs.readFile("C:\\Node Js\\random-api\\user.json", "utf-8", (err, data) => {
-    if (err) {
-      console.log(err);
-      res.end(" Failed to load the data from server!!!!!!!!");
-    } else {
-      // res.writeHead(200, { "content-type": "text/txt" });
-      console.log("success");
-      const newdata = JSON.parse(data);
-      res.send(newdata);
+  // fs.readFile("C:\\Node Js\\random-api\\user.json", "utf-8", (err, data) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.end(" Failed to load the data from server!!!!!!!!");
+  //   } else {
+  //     // res.writeHead(200, { "content-type": "text/txt" });
+  //     console.log("success");
+  //     const newdata = JSON.parse(data);
+  //     res.send(newdata);
 
-      return res.end();
-    }
-  });
+  //     return res.end();
+  //   }
+  // });
   //res.send(data);
+  loadUser().then((value) => {
+    console.log(JSON.parse(value));
+  });
+  // console.log(dat);
+  // if (!dat) {
+  //   res.send("Failed to load data from server!! ");
+  // } else {
+  //   res.send(dat);
+  // }
 };
 module.exports.getRandomUser = (req, res) => {
   fs.readFile("C:\\Node Js\\random-api\\user.json", "utf-8", (err, data) => {
@@ -35,10 +41,8 @@ module.exports.getRandomUser = (req, res) => {
       return res.end();
     }
   });
-  
 };
 module.exports.saveAUser = (req, res) => {
-  
   res.send("Save a user!!");
 };
 module.exports.updateAUser = (req, res) => {
