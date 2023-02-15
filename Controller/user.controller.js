@@ -20,7 +20,22 @@ module.exports.getAllUser = (req, res) => {
   //res.send(data);
 };
 module.exports.getRandomUser = (req, res) => {
-  res.send("Get a random user");
+  fs.readFile("C:\\Node Js\\random-api\\user.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end(" Failed to load the data from server!!!!!!!!");
+    } else {
+      // res.writeHead(200, { "content-type": "text/txt" });
+      //console.log("success");
+      const newdata = JSON.parse(data);
+      let len = newdata.length;
+      let randomDataInd = Math.floor(Math.random() * (len - 1));
+      res.send(newdata[randomDataInd]);
+
+      return res.end();
+    }
+  });
+  // res.send("Get a random user");
 };
 module.exports.saveAUser = (req, res) => {
   res.send("Save a user!!");
