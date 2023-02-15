@@ -2,8 +2,22 @@
 //   res.send("All User got");
 //   //next();
 // };
+const fs = require("fs");
 module.exports.getAllUser = (req, res) => {
-  res.send("Single user found");
+  fs.readFile("C:\\Node Js\\random-api\\user.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end(" Failed to load the data from server!!!!!!!!");
+    } else {
+      // res.writeHead(200, { "content-type": "text/txt" });
+      console.log("success");
+      const newdata = JSON.parse(data);
+      res.send(newdata);
+
+      return res.end();
+    }
+  });
+  //res.send(data);
 };
 module.exports.getRandomUser = (req, res) => {
   res.send("Get a random user");
