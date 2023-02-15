@@ -1,6 +1,7 @@
 const express = require("express");
 const { getAllUser } = require("../../Controller/user.controller");
 const user = require("../../Controller/user.controller");
+const { validateUser } = require("../../Middleware/validateUser");
 const router = express.Router();
 
 router
@@ -38,7 +39,7 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  .get(user.getRandomUser);
+  .get(validateUser, user.getRandomUser);
 router
   .route("/save")
   /**
@@ -56,7 +57,7 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  .post(user.getRandomUser);
+  .post(validateUser, user.saveAUser);
 router
   .route("/update")
   /**

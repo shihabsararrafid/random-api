@@ -35,9 +35,10 @@ module.exports.getRandomUser = (req, res) => {
       return res.end();
     }
   });
-  // res.send("Get a random user");
+  
 };
 module.exports.saveAUser = (req, res) => {
+  
   res.send("Save a user!!");
 };
 module.exports.updateAUser = (req, res) => {
