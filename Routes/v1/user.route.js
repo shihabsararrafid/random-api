@@ -113,6 +113,4 @@ router
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
   .delete(user.deleteAUser);
-//router.route("/random").get(user.getRandomUser);
-
 module.exports = router;
