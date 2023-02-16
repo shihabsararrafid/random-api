@@ -47,7 +47,40 @@ module.exports.saveAUser = (req, res) => {
 };
 module.exports.updateAUser = (req, res) => {
   console.log(req.index);
-  res.send(" User is updated");
+  let index = req.index;
+  let updateData = req.body;
+  loadUser()
+    .then((value) => {
+      let previosData = JSON.parse(value);
+      //genderaddress contact photoUrl
+      if ("name" in updateData) {
+        previosData[index].name = updateData.name;
+      }
+      if ("gender" in updateData) {
+        previosData[index].gender = updateData.gender;
+      }
+      if ("address" in updateData) {
+        previosData[index].address = updateData.address;
+      }
+      if ("contact" in updateData) {
+        previosData[index].contact = updateData.contact;
+      }
+      if ("photoUrl" in updateData) {
+        previosData[index].photoUrl = updateData.photoUrl;
+      }
+      fs.writeFileSync(
+        "C:\\Node Js\\random-api\\user.json",
+        JSON.stringify(previosData)
+      );
+      res.send("user!!");
+      // console.log(previosData);
+      //if()
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.send("Failed to save data!!!");
+    });
+ // res.send(" User is updated");
 };
 module.exports.updateAllUser = (req, res) => {
   res.send(" All the user updated");
