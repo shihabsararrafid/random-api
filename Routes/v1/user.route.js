@@ -1,6 +1,7 @@
 const express = require("express");
 const { getAllUser } = require("../../Controller/user.controller");
 const user = require("../../Controller/user.controller");
+const { checkUserId } = require("../../Middleware/checkUserId");
 const { validateId } = require("../../Middleware/validateId");
 const { validateUser } = require("../../Middleware/validateUser");
 const router = express.Router();
@@ -76,7 +77,7 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  .patch(user.updateAUser);
+  .patch(checkUserId, user.updateAUser);
 router
   .route("/bulk-update")
   /**

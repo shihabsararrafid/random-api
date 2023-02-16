@@ -46,6 +46,7 @@ module.exports.saveAUser = (req, res) => {
     });
 };
 module.exports.updateAUser = (req, res) => {
+  console.log(req.index);
   res.send(" User is updated");
 };
 module.exports.updateAllUser = (req, res) => {
