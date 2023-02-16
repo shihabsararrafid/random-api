@@ -1,3 +1,4 @@
+const { error } = require("console");
 const fs = require("fs");
 const { loadUser } = require("../Middleware/LoadUser");
 module.exports.getAllUser = (req, res) => {
@@ -15,9 +16,21 @@ module.exports.getAllUser = (req, res) => {
   //   }
   // });
   //res.send(data);
-  loadUser().then((value) => {
-    console.log(JSON.parse(value));
-  });
+  loadUser()
+    .then((value) => {
+      // const res = JSON.parse(value);
+      // if (res instanceof error) {
+      //   res.send("error occured");
+      // } else {
+      console.log(JSON.parse(value));
+      res.send(JSON.parse(value));
+      //}
+    })
+    .catch((error) => {
+      res.send("Internal Error !! Failed to load the data");
+      console.log(error.message);
+    });
+  // res.send("done");
   // console.log(dat);
   // if (!dat) {
   //   res.send("Failed to load data from server!! ");
