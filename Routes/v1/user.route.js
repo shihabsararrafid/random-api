@@ -98,7 +98,7 @@ Take an array of user ids and assign it to the body.
    */
   .patch(user.updateAllUser);
 router
-  .route("/delete")
+  .route("/delete/:id")
   /**
    * @api {delete} /delete delete user
    * @apiDescription Delete a user from the .json file using its id
@@ -115,5 +115,5 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  .delete(user.deleteAUser);
+  .delete(checkUserId, user.deleteAUser);
 module.exports = router;

@@ -2,7 +2,8 @@ const { loadUser } = require("./LoadUser");
 
 module.exports.checkUserId = (req, res, next) => {
   let newdata = req.body;
-  let newId = newdata.Id;
+  let newId = newdata.Id || req.params.id;
+  //console.log(newId);
   let valid = false;
   loadUser()
     .then((value) => {

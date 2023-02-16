@@ -118,5 +118,18 @@ module.exports.updateAllUser = (req, res) => {
   res.send(" All the user updated");
 };
 module.exports.deleteAUser = (req, res) => {
-  res.send("Deleted a user!");
+  let idnew = req.params.id;
+  console.log(idnew);
+  loadUser()
+    .then((value) => {
+      let previosData = JSON.parse(value);
+      let newData = previosData.filter((d) => d.Id !== Number(idnew));
+      console.log(typeof idnew);
+      fs.writeFileSync(
+        "C:\\Node Js\\random-api\\user.json",
+        JSON.stringify(newData)
+      );
+      res.send("Deleted User-_-");
+    })
+    .catch((error) => res.send(error.message));
 };
