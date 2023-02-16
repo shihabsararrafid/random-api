@@ -33,23 +33,16 @@ module.exports.saveAUser = (req, res) => {
       let data = JSON.parse(value);
       let newData = req.body;
       data.push(newData);
+      let msg;
       fs.writeFileSync(
         "C:\\Node Js\\random-api\\user.json",
-        JSON.stringify(data),
-        (err) => {
-          if (err) {
-            console.log("Error occured!!");
-          } else {
-            console.log("Saved user!");
-          }
-        }
+        JSON.stringify(data)
       );
-      res.send("Save a user!!");
-      // console.log(data);
+      res.send("user!!");
     })
     .catch((error) => {
       console.log(error.message);
-      res.send("Failed to saved data!!!");
+      res.send("Failed to save data!!!");
     });
 };
 module.exports.updateAUser = (req, res) => {
