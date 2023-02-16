@@ -1,5 +1,6 @@
 const { error } = require("console");
 const fs = require("fs");
+const { findUser } = require("../Middleware/findUser");
 const { loadUser } = require("../Middleware/LoadUser");
 module.exports.getAllUser = (req, res) => {
   loadUser()
@@ -46,12 +47,14 @@ module.exports.saveAUser = (req, res) => {
     });
 };
 module.exports.updateAUser = (req, res) => {
-  console.log(req.index);
+  // console.log(req.index);
   let index = req.index;
+  // console.log(findUser())
   let updateData = req.body;
   loadUser()
     .then((value) => {
       let previosData = JSON.parse(value);
+      console.log(findUser(previosData, updateData.Id));
       //genderaddress contact photoUrl
       if ("name" in updateData) {
         previosData[index].name = updateData.name;
@@ -80,9 +83,18 @@ module.exports.updateAUser = (req, res) => {
       console.log(error.message);
       res.send("Failed to save data!!!");
     });
- // res.send(" User is updated");
+  // res.send(" User is updated");
 };
 module.exports.updateAllUser = (req, res) => {
+  const newData = req.body;
+  loadUser().then((value) => {
+    let previosData = JSON.parse(value);
+    for (let i = 0; i < newData.length; i++) {
+      let index = findUser(previosData, newData[i].Id);
+      console.log(index);
+    }
+  });
+
   res.send(" All the user updated");
 };
 module.exports.deleteAUser = (req, res) => {
