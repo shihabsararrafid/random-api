@@ -91,8 +91,28 @@ module.exports.updateAllUser = (req, res) => {
     let previosData = JSON.parse(value);
     for (let i = 0; i < newData.length; i++) {
       let index = findUser(previosData, newData[i].Id);
+      if ("name" in newData[i]) {
+        previosData[index].name = newData[i].name;
+      }
+      if ("gender" in newData[i]) {
+        previosData[index].gender = newData[i].gender;
+      }
+      if ("address" in newData[i]) {
+        previosData[index].address = newData[i].address;
+      }
+      if ("contact" in newData[i]) {
+        previosData[index].contact = newData[i].contact;
+      }
+      if ("photoUrl" in newData[i]) {
+        previosData[index].photoUrl = newData[i].photoUrl;
+      }
       console.log(index);
     }
+    fs.writeFileSync(
+      "C:\\Node Js\\random-api\\user.json",
+      JSON.stringify(previosData)
+    );
+    // res.send("user!!");
   });
 
   res.send(" All the user updated");
