@@ -35,10 +35,7 @@ module.exports.saveAUser = (req, res) => {
       let newData = req.body;
       data.push(newData);
       let msg;
-      fs.writeFileSync(
-        "C:\\Node Js\\random-api\\user.json",
-        JSON.stringify(data)
-      );
+      fs.writeFileSync("user.json", JSON.stringify(data));
       res.send("user!!");
     })
     .catch((error) => {
@@ -71,10 +68,7 @@ module.exports.updateAUser = (req, res) => {
       if ("photoUrl" in updateData) {
         previosData[index].photoUrl = updateData.photoUrl;
       }
-      fs.writeFileSync(
-        "C:\\Node Js\\random-api\\user.json",
-        JSON.stringify(previosData)
-      );
+      fs.writeFileSync("user.json", JSON.stringify(previosData));
       res.send("user!!");
       // console.log(previosData);
       //if()
@@ -108,10 +102,7 @@ module.exports.updateAllUser = (req, res) => {
       }
       console.log(index);
     }
-    fs.writeFileSync(
-      "C:\\Node Js\\random-api\\user.json",
-      JSON.stringify(previosData)
-    );
+    fs.writeFileSync("user.json", JSON.stringify(previosData));
     // res.send("user!!");
   });
 
@@ -125,10 +116,7 @@ module.exports.deleteAUser = (req, res) => {
       let previosData = JSON.parse(value);
       let newData = previosData.filter((d) => d.Id !== Number(idnew));
       console.log(typeof idnew);
-      fs.writeFileSync(
-        "C:\\Node Js\\random-api\\user.json",
-        JSON.stringify(newData)
-      );
+      fs.writeFileSync("user.json", JSON.stringify(newData));
       res.send("Deleted User-_-");
     })
     .catch((error) => res.send(error.message));
